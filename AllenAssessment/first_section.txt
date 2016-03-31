@@ -1,0 +1,24 @@
+Alternative Resizable Array:
+When appending an item to the end of a resizable array, there may not be space at the end of the underlying fixed-size array. Creating a new underlying array and copying all the items is a time-consuming operation. What alternative approaches could you use to create a resizable array and how would you implement it?
+
+I don't think this is an alternative approach.. but the array could resize only every so often. For example, if space is needed for another item we could create a new array twice the size needed to fit the next item, and then copy the elements over. Overtime the array would only resize every so often rather than on each new array add. Time complexity for resizing would average out to O(n).
+---------------------------
+Implement a Queue:
+Assume you have good working implementations of these core list data structures:
+ - resizable array – operations: `get`, `set`, `size`
+ - circular buffer – operations: `get`, `set`, `size`
+ - singly linked list – operations: `head`, `tail`, `append`, `prepend`, `size`
+Which are good choices to implement a queue? Explain why or why not for each.
+What is time complexity of the `enqueue`, `dequeue`, `front`, and `size` operations?
+
+Resizable array would be a decent choice because you would have constant time enqueueing. unfortunately when dequeue you really don't know where the front of the queue is because you may have dequeued before. also while grabbing the front of the queue you don't know where the front is so you'd have to iterate from index 0 until you find the first item.  size would also be difficult because you'd have to iterate over the entire array to count the items becuasse you don't know where the start and stop is of the queue. If you did keep track of the front and end index of the array, enqueue, dequeu, and size would all be constant time, but you'd lose space due to dequeuing items.
+
+Circular buffer is the best way to go. constant time for all operations of a queue
+
+singly linked list is O(n) time to pop, O(1) time to push, O(n) to get the front, and O(n) for size, unless you kept track of the size..
+----------------------------
+Hash Table Buckets:
+When storing an entry in a hash table, we calculate the key's hash value. Sometimes there is a collision and a new entry hashes to the same bucket as an existing entry. To resolve this with chaining, we use a linked list in each bucket to hold multiple entries. Could we instead use another type of list, like an array or even another hash table? Would that type of list be an improvement over using a linked list? Why or why not?
+
+An array would make getting values somewhat unuseful because you would have to iterate over the entire array and check for the right value you're looking for.  you could rehash, and then store in another hashtable, but this could lead to more collisions, which means even more space. To keep collisisons in the same hash table (saving space), you could rehash with a specific algorithm to find an empty bucket and save the collision.
+
